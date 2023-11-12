@@ -1,5 +1,6 @@
+@import "../styles/mixins.scss";
+
 .login-page {
-  padding: 4rem;
   background-image: url(../../assets/Auth.jpg);
   background-position: center;
   background-repeat: no-repeat;
@@ -7,5 +8,5 @@
   height: 100vh;
   background-color: yellow;
   display: grid;
-  grid-template-rows: max-content 1fr;
+  place-content: center;
 }

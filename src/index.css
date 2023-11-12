@@ -30,8 +30,17 @@ body {
   font-family: var(--main-font-family);
 }
 
-input {
+input,
+select {
   display: inline-block;
   font-size: inherit;
   font-family: inherit;
+}
+
+.rotate-orgin {
+  transform: translate(-50%, -50%) rotateY(0);
+}
+
+.rotate-reverse {
+  transform: translate(-50%, -50%) rotateY(180deg);
 }
