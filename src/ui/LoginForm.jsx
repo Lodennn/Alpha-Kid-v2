@@ -5,11 +5,6 @@ import Styles from "./LoginForm.module.scss";
 
 function LoginForm({ flip, setFlip }) {
   return (
-    // <form
-    //   className={` ${
-    //     flip ? " rotate-orgin" : "rotate-reverse"
-    //   } absolute bg-white rounded-md transition-all rotate-y-180 min-h-[32vh] min-w-[32vw] flex flex-col gap-10 shadow-md  p-12 self-center justify-self-center`}
-    // >
     <form
       className={`${Styles["form"]} ${
         flip ? "rotate-reverse " : "rotate-orgin rotate-reverse-animation"
@@ -25,7 +20,7 @@ function LoginForm({ flip, setFlip }) {
         <Input type="password" variation="loginInput" />
       </div>
 
-      <div className="flex justify-between items-center">
+      <div className="flex md:justify-between gap-4 justify-center sm:justify-center items-center flex-wrap">
         <Button type="login">Login</Button>
         <Button
           type="rotate"

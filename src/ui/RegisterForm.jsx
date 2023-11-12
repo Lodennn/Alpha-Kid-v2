@@ -29,13 +29,13 @@ function RegisterForm({ flip, setFlip }) {
       </div>
       <div>
         <Label>User-Type</Label>
-        <select className="w-full p-2 text-2xl  border-solid border-2  focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2  border-sky-200  ">
+        <select className="w-full p-2 text-2xl border-solid border-2  focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2  border-sky-200  ">
           <option>Parent</option>
           <option>Teacher</option>
         </select>
       </div>
 
-      <div className="flex justify-between items-center">
+      <div className="flex justify-center gap-3 sm:gap-0 sm:justify-between items-center flex-wrap">
         <Button type="login">Sign Up</Button>
         <Button
           type="rotate"
