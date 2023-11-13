@@ -1,3 +1,4 @@
+import "@testing-library/jest-dom";
 import Button from "./Button";
 import Input from "./Input";
 import Label from "./Label";
@@ -6,18 +7,21 @@ import Styles from "./LoginForm.module.scss";
 function LoginForm({ flip, setFlip }) {
   return (
     <form
+      aria-label="form"
       className={`${Styles["form"]} ${
         flip ? "rotate-reverse " : "rotate-orgin rotate-reverse-animation"
       }`}
     >
       <h1 className={Styles["main-title"]}>Login</h1>
       <div>
-        <Label>Email Address</Label>
-        <Input type="email" variation="loginInput" />
+        {/* <Label>Email Address</Label> */}
+        <label htmlFor="email">Email Address</label>
+        <Input id="email" type="email" variation="loginInput" />
       </div>
       <div>
-        <Label>Password</Label>
-        <Input type="password" variation="loginInput" />
+        {/* <Label>Password</Label> */}
+        <label htmlFor="password">Password</label>
+        <Input id="password" type="password" variation="loginInput" />
       </div>
 
       <div className="flex md:justify-between gap-4 justify-center sm:justify-center items-center flex-wrap">

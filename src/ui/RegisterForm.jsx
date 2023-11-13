@@ -12,20 +12,24 @@ function RegisterForm({ flip, setFlip }) {
     >
       <h1 className={Styles["main-title"]}>Sign up</h1>
       <div>
-        <Label>Username</Label>
-        <Input type="text" variation="loginInput" />
+        {/* <Label>Username</Label> */}
+        <label htmlFor="username">Username</label>
+        <Input id="username" type="text" variation="loginInput" />
       </div>
       <div>
-        <Label>Email Address</Label>
-        <Input type="email" variation="loginInput" />
+        {/* <Label>Email Address</Label> */}
+        <label htmlFor="email">Email Address</label>
+        <Input id="email" type="email" variation="loginInput" />
       </div>
       <div>
-        <Label>Password</Label>
-        <Input type="password" variation="loginInput" />
+        {/* <Label>Password</Label> */}
+        <label htmlFor="password">Password</label>
+        <Input id="password" type="password" variation="loginInput" />
       </div>
       <div>
-        <Label>Re-Password</Label>
-        <Input type="password" variation="loginInput" />
+        {/* <Label>Re-Password</Label> */}
+        <label htmlFor="repassword">Re-Password</label>
+        <Input id="repassword" type="password" variation="loginInput" />
       </div>
       <div>
         <Label>User-Type</Label>
