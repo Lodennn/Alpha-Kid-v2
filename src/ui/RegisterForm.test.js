@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import RegisterForm from "./RegisterForm";
 
 test("it renders all required elements in register form", () => {
@@ -10,6 +10,7 @@ test("it renders all required elements in register form", () => {
   const passwordInput = screen.getByLabelText("Password");
   const rePasswordInput = screen.getByLabelText(/re-password/i);
   const userTypeInput = screen.getByRole("combobox");
+  const userTypes = within(userTypeInput).getAllByRole("option");
 
   const requiredElements = [
     usernameInput,
@@ -22,4 +23,6 @@ test("it renders all required elements in register form", () => {
   for (let element of requiredElements) {
     expect(element).toBeInTheDocument();
   }
+
+  expect(userTypes).toHaveLength(2);
 });
