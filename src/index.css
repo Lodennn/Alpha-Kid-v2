@@ -37,6 +37,13 @@ select {
   font-family: inherit;
 }
 
+img {
+  max-width: 100%;
+
+  /* For dark mode */
+  filter: grayscale(var(--image-grayscale)) opacity(var(--image-opacity));
+}
+
 .rotate-orgin {
   transform: translate(-50%, -50%) rotateY(0);
 }
