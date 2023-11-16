@@ -22,9 +22,12 @@
     min-width: 60vw;
   }
   @include respond(tab-port) {
-    min-width: 65vw;
+    min-width: 70vw;
   }
   @include respond(tab-land) {
-    min-width: 80vw;
+    min-width: 75vw;
+  }
+  @include respond(tab-land) {
+    min-width: 30vw;
   }
 }

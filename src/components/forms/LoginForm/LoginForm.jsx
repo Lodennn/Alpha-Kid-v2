@@ -22,6 +22,10 @@ function LoginForm({ flip, setFlip }) {
         type="password"
         variation="loginInput"
       /> */}
+      <label>email</label>
+      <input type=" text" />
+      <label>password</label>
+      <input type=" text" />
 
       <div className="flex md:justify-between gap-4 justify-center sm:justify-center items-center flex-wrap">
         <Button type="login">Login</Button>

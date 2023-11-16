@@ -6,10 +6,15 @@
   left: 4rem;
   object-fit: cover;
   width: 8rem;
+  @include respond(mini-phone) {
+    top: 1.5rem;
+    left: 0.4rem;
+    width: 6rem;
+  }
   @include respond(phone) {
     top: 2rem;
     left: 2rem;
-    width: 4rem;
+    width: 7.5rem;
   }
   @include respond(tab-port) {
     top: 1.8rem;
