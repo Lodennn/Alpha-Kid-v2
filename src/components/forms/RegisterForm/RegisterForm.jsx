@@ -5,13 +5,23 @@ import Styles from "./RegisterForm.module.scss";
 import SelectOptions from "../../../ui/SelectOptions";
 
 function RegisterForm({ flip, setFlip }) {
-  const { register, handleSubmit, reset, formState, getValues } = useForm();
+  const { register, handleSubmit, reset, formState, getValues, watch } =
+    useForm({
+      mode: "onChange",
+    });
 
   const { errors } = formState;
+
+  const formData = watch();
+
+  const verfiedPassword =
+    formData.password !== "" &&
+    formData.password === formData.passwordVerfication;
 
   function onSubmit(data) {
     console.log("data", data);
     reset();
+    setFlip(false);
   }
 
   function onError(errors) {
@@ -39,6 +49,10 @@ function RegisterForm({ flip, setFlip }) {
             value: true,
             message: `The user name is required`,
           },
+          minLength: {
+            value: 6,
+            message: "The user name must be at least 6 characters",
+          },
         }}
       />
 
@@ -63,6 +77,7 @@ function RegisterForm({ flip, setFlip }) {
       />
 
       <Input
+        verfiedPassword={verfiedPassword}
         errors={errors}
         id="password"
         label="Password"
@@ -83,6 +98,7 @@ function RegisterForm({ flip, setFlip }) {
       />
       <Input
         errors={errors}
+        verfiedPassword={verfiedPassword}
         id="passwordVerfication"
         label="Re-Password"
         type="password"
@@ -104,7 +120,7 @@ function RegisterForm({ flip, setFlip }) {
         />
       </div>
 
-      <div className="flex justify-center gap-3 sm:gap-0 sm:justify-between items-center flex-wrap">
+      <div className="flex justify-center gap-3 m-4 sm:m-3 md:m-2 sm:gap-0 sm:justify-between items-center flex-wrap">
         <Button type="login">Sign Up</Button>
         <Button
           type="rotate"

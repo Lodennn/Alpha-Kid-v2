@@ -1,6 +1,7 @@
 function Button({ children, type, onClick }) {
   const styles = {
-    login: "px-6 py-2 px-6 text-3xl text-white bg-sky-500",
+    login:
+      "md:px-6 md:py-2 px-2 py-1   text-xl sm:text-2xl md:text-3xl text-white bg-sky-500",
 
     rotate: "text-xl text-sky-500",
   };
