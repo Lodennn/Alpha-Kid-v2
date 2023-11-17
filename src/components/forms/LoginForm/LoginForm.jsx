@@ -1,6 +1,5 @@
-import Button from "./Button";
-import Input from "./Input";
-import Label from "./Label";
+import Button from "../../../ui/Button";
+import Input from "../../../ui/Input";
 import Styles from "./LoginForm.module.scss";
 
 function LoginForm({ flip, setFlip }) {
@@ -11,14 +10,22 @@ function LoginForm({ flip, setFlip }) {
       }`}
     >
       <h1 className={Styles["main-title"]}>Login</h1>
-      <div>
-        <Label>Email Address</Label>
-        <Input type="email" variation="loginInput" />
-      </div>
-      <div>
-        <Label>Password</Label>
-        <Input type="password" variation="loginInput" />
-      </div>
+      {/* <Input
+        label="Enail Address"
+        id="loginEmail"
+        type="email"
+        variation="loginInput"
+      />
+      <Input
+        label="Password"
+        id="passowrd"
+        type="password"
+        variation="loginInput"
+      /> */}
+      <label>email</label>
+      <input type=" text" />
+      <label>password</label>
+      <input type=" text" />
 
       <div className="flex md:justify-between gap-4 justify-center sm:justify-center items-center flex-wrap">
         <Button type="login">Login</Button>
