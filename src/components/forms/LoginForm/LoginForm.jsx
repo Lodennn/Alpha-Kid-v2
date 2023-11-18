@@ -28,14 +28,10 @@ function LoginForm({ flip, setFlip }) {
       <input type=" text" />
 
       <div className="flex md:justify-between gap-4 justify-center sm:justify-center items-center flex-wrap">
-        <Button type="login">Login</Button>
-        <Button
-          type="rotate"
-          onClick={(e) => {
-            e.preventDefault();
-            setFlip(() => true);
-          }}
-        >
+        <Button type="submit" variation="login">
+          Login
+        </Button>
+        <Button variation="rotate" onClick={() => setFlip(() => true)}>
           Create a new account
         </Button>
       </div>

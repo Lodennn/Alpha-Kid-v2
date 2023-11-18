@@ -3,6 +3,13 @@ import Button from "../../../ui/Button";
 import Input from "../../../ui/Input";
 import Styles from "./RegisterForm.module.scss";
 import SelectOptions from "../../../ui/SelectOptions";
+import toast from "react-hot-toast";
+import {
+  userTypes,
+  emailPattern,
+  userNameMaxLength,
+  passwordPattern,
+} from "../../../helpers/userTypes";
 
 function RegisterForm({ flip, setFlip }) {
   const { register, handleSubmit, reset, formState, getValues, watch } =
@@ -14,14 +21,11 @@ function RegisterForm({ flip, setFlip }) {
 
   const formData = watch();
 
-  const verfiedPassword =
-    formData.password !== "" &&
-    formData.password === formData.passwordVerfication;
-
   function onSubmit(data) {
     console.log("data", data);
     reset();
     setFlip(false);
+    toast.success(" Your Email is Successfully created");
   }
 
   function onError(errors) {
@@ -38,6 +42,11 @@ function RegisterForm({ flip, setFlip }) {
       <h1 className={Styles["main-title"]}>Sign up</h1>
 
       <Input
+        className={
+          formData.username
+            ? "bg-green-100 border-green-200 focus:ring-green-400"
+            : ""
+        }
         errors={errors}
         label="Username"
         id="username"
@@ -50,13 +59,18 @@ function RegisterForm({ flip, setFlip }) {
             message: `The user name is required`,
           },
           minLength: {
-            value: 6,
+            value: userNameMaxLength,
             message: "The user name must be at least 6 characters",
           },
         }}
       />
 
       <Input
+        className={
+          formData.registerEmail
+            ? "bg-green-100 border-green-200 focus:ring-green-400"
+            : ""
+        }
         errors={errors}
         id="registerEmail"
         label="Email Address"
@@ -69,15 +83,18 @@ function RegisterForm({ flip, setFlip }) {
             message: `The Email address is required`,
           },
           pattern: {
-            value:
-              /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            value: emailPattern,
             message: "invalid email address",
           },
         }}
       />
 
       <Input
-        verfiedPassword={verfiedPassword}
+        className={
+          formData.password
+            ? "bg-green-100 border-green-200 focus:ring-green-400"
+            : ""
+        }
         errors={errors}
         id="password"
         label="Password"
@@ -90,15 +107,19 @@ function RegisterForm({ flip, setFlip }) {
             message: `The password is required`,
           },
           pattern: {
-            value:
-              /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+            value: passwordPattern,
             message: "Invalid Password Format",
           },
         }}
       />
       <Input
+        className={
+          formData.password !== "" &&
+          formData.password === formData.passwordVerfication
+            ? "bg-green-100 border-green-200 focus:ring-green-400"
+            : ""
+        }
         errors={errors}
-        verfiedPassword={verfiedPassword}
         id="passwordVerfication"
         label="Re-Password"
         type="password"
@@ -113,22 +134,29 @@ function RegisterForm({ flip, setFlip }) {
 
       <div>
         <SelectOptions
+          errors={errors}
+          defaultValue="Please Select User Type"
           type="registerType"
-          name="user-type"
-          options={[{ value: "Teacher" }, { value: "Parent" }]}
+          name="userType"
+          options={userTypes}
           register={register}
+          validationOptions={{
+            required: {
+              value: true,
+              message: "Please Select User Type",
+            },
+            validate: (value) =>
+              value !== "Please Select User Type" ||
+              "Please Select a valid Type",
+          }}
         />
       </div>
 
       <div className="flex justify-center gap-3 m-4 sm:m-3 md:m-2 sm:gap-0 sm:justify-between items-center flex-wrap">
-        <Button type="login">Sign Up</Button>
-        <Button
-          type="rotate"
-          onClick={(e) => {
-            e.preventDefault();
-            setFlip(() => false);
-          }}
-        >
+        <Button type="submit" variation="login">
+          Sign Up
+        </Button>
+        <Button variation="rotate" onClick={() => setFlip(() => false)}>
           Already have an account ?
         </Button>
       </div>
