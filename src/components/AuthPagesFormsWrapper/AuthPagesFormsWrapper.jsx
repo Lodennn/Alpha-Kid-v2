@@ -1,7 +1,7 @@
 import { useState } from "react";
-import LoginForm from "./LoginForm";
-import RegisterForm from "./RegisterForm";
-import Styles from "./FormsWrapper.module.scss";
+import Styles from "./AuthPagesFormsWrapper.module.scss";
+import LoginForm from "../forms/LoginForm/LoginForm";
+import RegisterForm from "../forms/RegisterForm/RegisterForm";
 
 function FormsWrapper() {
   const [flip, setFlip] = useState(false);
