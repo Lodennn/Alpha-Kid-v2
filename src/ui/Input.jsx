@@ -19,8 +19,8 @@ function Input({
   return (
     <div className="flex flex-col gap-1 sm:gap-1 md:gap-1">
       <label
-        className="text-2xl 2xl:mt-3 mb-0 mt-3 md:mt-1 sm:mt-1 block sm:mb-1 md:mb-1 lg:mb-3 "
-        htmlFor={type}
+        className="text-2xl 2xl:mt-3 mb-0 mt-3 md:mt-1 sm:mt-1 block sm:mb-1 md:mb-1 lg:mb-3"
+        htmlFor={id} // ⚠️ not type it should be id
       >
         {label}
       </label>
