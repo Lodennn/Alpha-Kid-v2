@@ -34,6 +34,16 @@ const renderComponent = () => {
   };
 };
 
+test("it renders register form successfully", () => {
+  renderComponent();
+
+  const signupHeading = screen.getByRole("heading", {
+    name: /sign up/i,
+  });
+
+  expect(signupHeading).toBeInTheDocument();
+});
+
 test("it renders all required elements in register form", () => {
   const {
     usernameInput,
@@ -102,6 +112,26 @@ test("email input is accepting the right format", async () => {
   const invalidEmailErrorMessage = screen.queryByText(/invalid email address/i);
 
   expect(invalidEmailErrorMessage).not.toBeInTheDocument();
+});
+
+test("select input is valid", async () => {
+  const { userTypesSelectInput, submitButton } = renderComponent();
+
+  const selectOptions = {
+    invalid: "Please Select User Type",
+    parent: "Parent",
+    teacher: "Teacher",
+  };
+
+  await user.selectOptions(userTypesSelectInput, selectOptions.parent);
+
+  await user.click(submitButton);
+
+  const invalidUserTypeErrorMessage = screen.queryByText(
+    /Please Select a valid Type/i
+  );
+
+  expect(invalidUserTypeErrorMessage).not.toBeInTheDocument();
 });
 
 test("password input is accepting the right format", async () => {

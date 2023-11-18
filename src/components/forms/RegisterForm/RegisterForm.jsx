@@ -17,20 +17,17 @@ function RegisterForm({ flip, setFlip }) {
       mode: "onChange",
     });
 
-  const { errors } = formState;
+  const { errors } = formState; // ⚠️ not the proper way to destruct errors
 
   const formData = watch();
 
   function onSubmit(data) {
-    console.log("data", data);
     reset();
     setFlip(false);
     toast.success(" Your Email is Successfully created");
   }
 
-  function onError(errors) {
-    console.log("errors", errors);
-  }
+  function onError(errors) {}
 
   return (
     <form
