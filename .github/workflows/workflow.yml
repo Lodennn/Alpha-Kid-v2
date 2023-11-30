@@ -1,6 +1,6 @@
 name: Deploy Alphakid app
 on:
-  push:
+  pull_request:
     branches:
       - main
 jobs:

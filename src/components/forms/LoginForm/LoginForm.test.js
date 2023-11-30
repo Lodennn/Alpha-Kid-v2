@@ -1,11 +1,13 @@
 import "@testing-library/jest-dom";
-
 import { render, screen, within } from "@testing-library/react";
 import user from "@testing-library/user-event";
 import LoginForm from "./LoginForm";
 
 test("it renders a login form successfully", () => {
-  render(<LoginForm />);
+  let flip = false;
+  let setFlip = jest.fn();
+
+  render(<LoginForm flip={flip} setFlip={setFlip} />);
 
   const loginForm = screen.getByRole("form");
 
@@ -22,4 +24,20 @@ test("it renders a login form successfully", () => {
   expect(emailInput).toBeInTheDocument();
   expect(passwordInput).toBeInTheDocument();
   expect(loginSubmitButton).toBeInTheDocument();
+});
+
+test("if *create a new account* button is working correctly", async () => {
+  let setFlip = jest.fn();
+
+  render(<LoginForm flip={false} setFlip={setFlip} />);
+
+  const loginForm = screen.getByRole("form");
+
+  const createNewAccountButton = within(loginForm).getByRole("button", {
+    name: /create/i,
+  });
+
+  await user.click(createNewAccountButton);
+
+  expect(setFlip.mock.calls[0][0]()).toEqual(true);
 });
