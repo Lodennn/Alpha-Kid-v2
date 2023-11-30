@@ -1,0 +1,11 @@
+name: Deploy Alphakid app
+on: 
+  push:
+    branches:
+      - main
+jobs:
+  test:
+    runs-on: ubuntu-runner
+    steps:
+      - name: get the code
+        uses: actions/checkout@v4
