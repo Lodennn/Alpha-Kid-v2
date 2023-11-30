@@ -5,6 +5,7 @@ on:
       - main
 jobs:
   test:
+    name: Run Testing
     runs-on: ubuntu-runner
     steps:
       - name: Get The Code
