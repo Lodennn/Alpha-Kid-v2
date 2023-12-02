@@ -1,6 +1,7 @@
 import ErrorMessage from "./ErrorMessage";
 
 function SelectOptions({
+  disabled,
   options,
   type,
   register,
@@ -20,7 +21,9 @@ function SelectOptions({
       <select {...register(name, validationOptions)} className={styles[type]}>
         <option>{defaultValue}</option>
         {options.map((option) => (
-          <option key={option.value}>{option.value}</option>
+          <option disabled={disabled} key={option.id}>
+            {option.value}
+          </option>
         ))}
       </select>
       {<ErrorMessage>{errors.userType?.message}</ErrorMessage>}

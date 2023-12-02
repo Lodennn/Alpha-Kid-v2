@@ -3,7 +3,6 @@
 .main-title {
   font-size: 3rem;
   font-family: var(--secondary-font-family);
-  margin-bottom: 1.5rem;
 }
 
 .form {
@@ -31,4 +30,8 @@
   @include respond(tab-land) {
     min-width: 30vw;
   }
+}
+
+.label {
+  font-size: 2.4rem;
 }

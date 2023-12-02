@@ -2,6 +2,7 @@ import ErrorMessage from "./ErrorMessage";
 
 function Input({
   className,
+  disabled,
   id,
   label,
   type,
@@ -26,6 +27,7 @@ function Input({
       </label>
 
       <input
+        disabled={disabled}
         {...register(id, validationOptions)}
         type={type}
         id={id}

@@ -3,13 +3,14 @@ import Button from "../../../ui/Button";
 import Input from "../../../ui/Input";
 import Styles from "./RegisterForm.module.scss";
 import SelectOptions from "../../../ui/SelectOptions";
-import toast from "react-hot-toast";
 import {
   userTypes, // ⚠️
   emailPattern,
   userNameMaxLength,
   passwordPattern,
-} from "../../../helpers/userTypes";
+} from "../../../utils/userTypes";
+import { useSignup } from "../../../hooks/useSignup";
+import Spinner from "../../../ui/Spinner/Spinner";
 
 function RegisterForm({ flip, setFlip }) {
   const { register, handleSubmit, reset, formState, getValues, watch } =
@@ -17,6 +18,7 @@ function RegisterForm({ flip, setFlip }) {
       mode: "onChange",
     });
 
+<<<<<<< HEAD
   const { errors } = formState; // ⚠️ not the proper way to destruct errors
 
   const formData = watch();
@@ -25,9 +27,28 @@ function RegisterForm({ flip, setFlip }) {
     reset();
     setFlip(false);
     toast.success(" Your Email is Successfully created");
+=======
+  const { signup, isPending } = useSignup();
+
+  const { errors } = formState;
+
+  const formData = watch();
+
+  function onSubmit({ userName, email, password, userType }) {
+    signup(
+      { userName, userType, email, password },
+      {
+        onSuccess: () => setFlip(false),
+
+        onSettled: () => reset(),
+      }
+    );
+>>>>>>> b20544d (AK-17)
   }
 
   function onError(errors) {}
+
+  if (isPending) return <Spinner />;
 
   return (
     <form
@@ -40,13 +61,18 @@ function RegisterForm({ flip, setFlip }) {
 
       <Input
         className={
-          formData.username
+          formData?.username?.length > 6
             ? "bg-green-100 border-green-200 focus:ring-green-400"
             : ""
         }
+        disabled={isPending}
         errors={errors}
         label="Username"
+<<<<<<< HEAD
         id="username" // ⚠️ id should be name
+=======
+        id="userName"
+>>>>>>> b20544d (AK-17)
         type="text"
         variation="loginInput" // ⚠️ the loginInput name is too specific for variation
         register={register}
@@ -64,12 +90,13 @@ function RegisterForm({ flip, setFlip }) {
 
       <Input
         className={
-          formData.registerEmail
+          formData?.registerEmail?.includes("@")
             ? "bg-green-100 border-green-200 focus:ring-green-400"
             : ""
         }
+        disabled={isPending}
         errors={errors}
-        id="registerEmail"
+        id="email"
         label="Email Address"
         type="email"
         variation="loginInput"
@@ -92,6 +119,7 @@ function RegisterForm({ flip, setFlip }) {
             ? "bg-green-100 border-green-200 focus:ring-green-400"
             : ""
         }
+        disabled={isPending}
         errors={errors}
         id="password"
         label="Password"
@@ -116,6 +144,7 @@ function RegisterForm({ flip, setFlip }) {
             ? "bg-green-100 border-green-200 focus:ring-green-400"
             : ""
         }
+        disabled={isPending}
         errors={errors}
         id="passwordVerfication"
         label="Re-Password"
@@ -131,6 +160,8 @@ function RegisterForm({ flip, setFlip }) {
 
       <div>
         <SelectOptions
+          disabled={isPending}
+          id="userType"
           errors={errors}
           defaultValue="Please Select User Type"
           type="registerType"
