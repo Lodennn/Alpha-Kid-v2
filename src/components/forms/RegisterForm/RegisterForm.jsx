@@ -4,35 +4,32 @@ import Input from "../../../ui/Input";
 import Styles from "./RegisterForm.module.scss";
 import SelectOptions from "../../../ui/SelectOptions";
 import {
-  userTypes, // ⚠️
+  userTypes,
   emailPattern,
   userNameMaxLength,
   passwordPattern,
+  checkUserType,
 } from "../../../utils/userTypes";
 import { useSignup } from "../../../hooks/useSignup";
 import Spinner from "../../../ui/Spinner/Spinner";
 
 function RegisterForm({ flip, setFlip }) {
-  const { register, handleSubmit, reset, formState, getValues, watch } =
-    useForm({
-      mode: "onChange",
-    });
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+    getValues,
+    watch,
+  } = useForm({
+    mode: "onChange",
+  });
 
-<<<<<<< HEAD
-  const { errors } = formState; // ⚠️ not the proper way to destruct errors
+  // const { errors } = formState; // ⚠️ not the proper way to destruct errors
 
   const formData = watch();
 
-  function onSubmit(data) {
-    reset();
-    setFlip(false);
-    toast.success(" Your Email is Successfully created");
-=======
   const { signup, isPending } = useSignup();
-
-  const { errors } = formState;
-
-  const formData = watch();
 
   function onSubmit({ userName, email, password, userType }) {
     signup(
@@ -43,16 +40,13 @@ function RegisterForm({ flip, setFlip }) {
         onSettled: () => reset(),
       }
     );
->>>>>>> b20544d (AK-17)
   }
-
-  function onError(errors) {}
 
   if (isPending) return <Spinner />;
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit, onError)}
+      onSubmit={handleSubmit(onSubmit)}
       className={`${Styles["form"]} ${
         flip ? "rotate-orgin " : "rotate-reverse "
       }`}
@@ -61,20 +55,16 @@ function RegisterForm({ flip, setFlip }) {
 
       <Input
         className={
-          formData?.username?.length > 6
-            ? "bg-green-100 border-green-200 focus:ring-green-400"
+          formData?.name?.length >= userNameMaxLength
+            ? "bg-green-100 border-solid border-2 border-green-300 focus:ring-offset-1 focus:ring-green-500"
             : ""
         }
         disabled={isPending}
         errors={errors}
         label="Username"
-<<<<<<< HEAD
-        id="username" // ⚠️ id should be name
-=======
-        id="userName"
->>>>>>> b20544d (AK-17)
+        id="name" // ⚠️ id should be name
         type="text"
-        variation="loginInput" // ⚠️ the loginInput name is too specific for variation
+        variation="login" // ⚠️ the loginInput name is too specific for variation
         register={register}
         validationOptions={{
           required: {
@@ -90,8 +80,8 @@ function RegisterForm({ flip, setFlip }) {
 
       <Input
         className={
-          formData?.registerEmail?.includes("@")
-            ? "bg-green-100 border-green-200 focus:ring-green-400"
+          formData?.email && !errors?.email
+            ? "bg-green-100 border-solid border-2 border-green-300 focus:ring-offset-1 focus:ring-green-500"
             : ""
         }
         disabled={isPending}
@@ -99,7 +89,7 @@ function RegisterForm({ flip, setFlip }) {
         id="email"
         label="Email Address"
         type="email"
-        variation="loginInput"
+        variation="login"
         register={register}
         validationOptions={{
           required: {
@@ -115,8 +105,8 @@ function RegisterForm({ flip, setFlip }) {
 
       <Input
         className={
-          formData.password
-            ? "bg-green-100 border-green-200 focus:ring-green-400"
+          formData?.password && !errors?.password
+            ? "bg-green-100 border-solid border-2 border-green-300 focus:ring-offset-1 focus:ring-green-500"
             : ""
         }
         disabled={isPending}
@@ -124,7 +114,7 @@ function RegisterForm({ flip, setFlip }) {
         id="password"
         label="Password"
         type="password"
-        variation="loginInput"
+        variation="login"
         register={register}
         validationOptions={{
           required: {
@@ -133,15 +123,15 @@ function RegisterForm({ flip, setFlip }) {
           },
           pattern: {
             value: passwordPattern,
-            message: "Invalid Password Format", // ⚠️ it should be invalid not Invalid
+            message: "invalid Password Format", // ⚠️ it should be invalid not Invalid
           },
         }}
       />
       <Input
         className={
-          formData.password !== "" &&
-          formData.password === formData.passwordVerfication
-            ? "bg-green-100 border-green-200 focus:ring-green-400"
+          formData?.password &&
+          formData?.password === formData?.passwordVerfication
+            ? "bg-green-100 border-solid border-2 border-green-300 focus:ring-offset-1 focus:ring-green-500"
             : ""
         }
         disabled={isPending}
@@ -149,7 +139,7 @@ function RegisterForm({ flip, setFlip }) {
         id="passwordVerfication"
         label="Re-Password"
         type="password"
-        variation="loginInput"
+        variation="login"
         register={register}
         validationOptions={{
           required: "Password does not match",
@@ -173,9 +163,9 @@ function RegisterForm({ flip, setFlip }) {
               value: true,
               message: "Please Select User Type",
             },
-            validate: (value) =>
-              value !== "Please Select User Type" || // ⚠️
-              "Please Select a valid Type",
+            validate: (value) => {
+              if (!checkUserType(value)) return "Please Select a valid Type"; // ⚠️;
+            },
           }}
         />
       </div>
