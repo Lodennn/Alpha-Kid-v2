@@ -29,6 +29,10 @@ function RegisterForm({ flip, setFlip }) {
 
   const formData = watch();
 
+  console.log(formData);
+
+  console.log(errors);
+
   const { signup, isPending } = useSignup();
 
   function onSubmit({ userName, email, password, userType }) {
@@ -55,14 +59,14 @@ function RegisterForm({ flip, setFlip }) {
 
       <Input
         className={
-          formData?.name?.length >= userNameMaxLength
-            ? "bg-green-100 border-solid border-2 border-green-300 focus:ring-offset-1 focus:ring-green-500"
+          formData?.userName?.length >= userNameMaxLength
+            ? "bg-green-100 border-solid border-2 border-green-300 focus:ring-offset-1 focus:ring-green-400"
             : ""
         }
         disabled={isPending}
         errors={errors}
         label="Username"
-        id="name" // ⚠️ id should be name
+        id="userName" // ⚠️ id should be name
         type="text"
         variation="login" // ⚠️ the loginInput name is too specific for variation
         register={register}
@@ -81,7 +85,7 @@ function RegisterForm({ flip, setFlip }) {
       <Input
         className={
           formData?.email && !errors?.email
-            ? "bg-green-100 border-solid border-2 border-green-300 focus:ring-offset-1 focus:ring-green-500"
+            ? "bg-green-100 border-solid border-2 border-green-300 focus:ring-offset-1 focus:ring-green-400"
             : ""
         }
         disabled={isPending}
@@ -106,7 +110,7 @@ function RegisterForm({ flip, setFlip }) {
       <Input
         className={
           formData?.password && !errors?.password
-            ? "bg-green-100 border-solid border-2 border-green-300 focus:ring-offset-1 focus:ring-green-500"
+            ? "bg-green-100 border-solid border-2 border-green-300 focus:ring-offset-1 focus:ring-green-400"
             : ""
         }
         disabled={isPending}
@@ -131,7 +135,7 @@ function RegisterForm({ flip, setFlip }) {
         className={
           formData?.password &&
           formData?.password === formData?.passwordVerfication
-            ? "bg-green-100 border-solid border-2 border-green-300 focus:ring-offset-1 focus:ring-green-500"
+            ? "bg-green-100 border-solid border-2 border-green-300 focus:ring-offset-1 focus:ring-green-400"
             : ""
         }
         disabled={isPending}
