@@ -63,7 +63,7 @@ function LoginForm({ flip, setFlip }) {
       </div>
 
       <div className="flex md:justify-between gap-4 justify-center sm:justify-center items-center flex-wrap">
-        <Button type="submit" variation="login">
+        <Button disabled={isPending} type="submit" variation="login">
           {isPending ? <SpinnerMini /> : "Login"}
         </Button>
         <Button variation="rotate" onClick={() => setFlip(() => true)}>

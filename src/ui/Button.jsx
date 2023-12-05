@@ -1,4 +1,4 @@
-function Button({ children, variation, type, onClick }) {
+function Button({ children, variation, type, onClick, disabled }) {
   const styles = {
     login:
       "md:px-6 md:py-2 px-2 py-1  text-xl sm:text-2xl md:text-3xl text-white bg-sky-500",
@@ -8,6 +8,7 @@ function Button({ children, variation, type, onClick }) {
 
   return (
     <button
+      disabled={disabled}
       onClick={onClick}
       type={type || "button"}
       className={styles[variation]}
