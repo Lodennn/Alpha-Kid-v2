@@ -3,14 +3,13 @@
 .main-title {
   font-size: 3rem;
   font-family: var(--secondary-font-family);
-  margin-bottom: 1.5rem;
 }
 
 .form {
   position: absolute;
   background-color: white;
   border-radius: 5px;
-  min-width: 35vw;
+  min-width: max(35vw, 80%);
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -31,4 +30,8 @@
   @include respond(tab-land) {
     min-width: 30vw;
   }
+}
+
+.label {
+  font-size: 2.4rem;
 }

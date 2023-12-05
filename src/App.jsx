@@ -1,31 +1,70 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "./pages/AuthPage";
+import Login from "./pages/AuthPage/AuthPage";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 import { Toaster } from "react-hot-toast";
+
+import ParentPage from "./pages/ParentPage/ParentPage";
+import ProtectRoute from "./ui/ProtectRoute";
+import TeacherPage from "./pages/TeacherPage/TeacherPage";
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools client={queryClient} initialIsOpen={false} />
+
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route
+            path="/"
+            element={
+              <ProtectRoute>
+                <Login />
+              </ProtectRoute>
+            }
+          />
+          <Route
+            path="parent"
+            element={
+              <ProtectRoute>
+                <ParentPage />
+              </ProtectRoute>
+            }
+          />
+          <Route
+            path="teacher"
+            element={
+              <ProtectRoute>
+                <TeacherPage />
+              </ProtectRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
       <Toaster
+        position="top-center"
+        gutter={12}
+        containerStyle={{ margin: "8px" }}
         toastOptions={{
-          style: {
-            border: "1px solid white",
-            padding: "16px",
-          },
           success: {
-            style: {
-              background: "white",
-              fontSize: "1.5rem",
-            },
-            duration: 4000,
+            duration: 3000,
+          },
+          error: {
+            duration: 5000,
+          },
+          style: {
+            fontSize: "16px",
+            maxWidth: "500px",
+            padding: "16px 24px",
+            backgroundColor: "white",
+            color: "black",
           },
         }}
       />
-    </>
+    </QueryClientProvider>
   );
 }
 

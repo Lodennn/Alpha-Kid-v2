@@ -1,7 +1,8 @@
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import user from "@testing-library/user-event";
 import RegisterForm from "./RegisterForm";
+import { renderWithProviders } from "Services/Testing";
 
 const renderComponent = () => {
   const formData = {
@@ -14,7 +15,7 @@ const renderComponent = () => {
 
   const fn = jest.fn();
 
-  render(<RegisterForm flip={true} setFlip={fn} />);
+  renderWithProviders(<RegisterForm flip={true} setFlip={fn} />);
 
   const usernameInput = screen.getByRole("textbox", { name: /username/i });
   const emailInput = screen.getByRole("textbox", { name: /email/i });
