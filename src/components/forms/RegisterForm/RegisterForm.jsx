@@ -6,7 +6,7 @@ import SelectOptions from "ui/SelectOptions";
 import { emailPattern, passwordPattern, checkUserType } from "utils/userTypes";
 import { userNameMaxLength, userTypes } from "constants/user";
 import { useSignup } from "hooks/useSignup";
-import SpinnerMini from "ui/SpinnerMini/SpinnerMini";
+import Loader from "ui/Loader/Loader";
 import { storage } from "services/storage";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -44,7 +44,7 @@ function RegisterForm({ flip, setFlip }) {
 
   const formData = watch();
 
-  const { signup, isPending, error } = useSignup();
+  const { signup, isPending } = useSignup();
 
   function onSubmit({ userName, email, password, userType }) {
     signup(
@@ -185,7 +185,7 @@ function RegisterForm({ flip, setFlip }) {
 
       <div className="flex justify-center gap-3 m-4 sm:m-3 md:m-2 sm:gap-0 sm:justify-between items-center flex-wrap">
         <Button disabled={isPending} type="submit" variation="login">
-          {isPending ? <SpinnerMini /> : "Sign Up"}
+          {isPending ? <Loader /> : "Sign Up"}
         </Button>
         <Button
           variation="rotate"

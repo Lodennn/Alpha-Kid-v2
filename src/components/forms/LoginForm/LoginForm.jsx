@@ -1,7 +1,7 @@
 import Styles from "./LoginForm.module.scss";
 import Button from "ui/Button";
 import { useLogin } from "hooks/useLogin";
-import SpinnerMini from "ui/SpinnerMini/SpinnerMini";
+import Loader from "ui/Loader/Loader";
 import Input from "ui/Input";
 import { useForm } from "react-hook-form";
 import { emailPattern, passwordPattern } from "utils/userTypes";
@@ -96,7 +96,7 @@ function LoginForm({ flip, setFlip }) {
 
       <div className="flex md:justify-between gap-4 justify-center sm:justify-center items-center flex-wrap">
         <Button disabled={isPending} type="submit" variation="login">
-          {isPending ? <SpinnerMini /> : "Login"}
+          {isPending ? <Loader /> : "Login"}
         </Button>
         <Button variation="rotate" onClick={() => setFlip(() => true)}>
           Create a new account

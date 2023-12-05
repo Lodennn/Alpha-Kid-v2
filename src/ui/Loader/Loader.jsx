@@ -1,4 +1,4 @@
-import styles from "./SpinnerMini.module.scss";
+import styles from "./Loader.module.scss";
 
 function SpinnerMini() {
   return <span className={styles["loader"]}></span>;

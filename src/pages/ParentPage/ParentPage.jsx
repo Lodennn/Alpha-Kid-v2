@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useUser } from "hooks/useUser";
 import { useCreateChild } from "features/children/useCreateChild";
 import { useLogout } from "hooks/useLogout";
-import Spinner from "ui/Spinner/Spinner";
+import PagesSpinner from "ui/PagesSpinner/PagesSpinner";
 
 function ParentPage() {
   const { user } = useUser();
@@ -13,7 +13,7 @@ function ParentPage() {
   const [name, setName] = useState("");
   const [gender, setGender] = useState("");
 
-  if (isPending) return <Spinner />;
+  if (isPending) return <PagesSpinner />;
 
   function handleSubmit(e) {
     e.preventDefault();
