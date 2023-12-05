@@ -2,6 +2,7 @@ import ErrorMessage from "./ErrorMessage";
 
 function Input({
   className,
+  disabled,
   id,
   label,
   type,
@@ -11,8 +12,10 @@ function Input({
   validationOptions,
 }) {
   const styles = {
-    loginInput: ` ${className} ${
-      errors[id || ""] ? "bg-red-200 border-red-200 focus:ring-red-400 " : ""
+    login: ` ${className} ${
+      errors[id || ""]
+        ? "bg-red-200 border-1 border-solid border-red-500 focus:ring-offset-1 focus:ring-red-600 "
+        : ""
     } border-solid border-2  text-2xl focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2  border-sky-200 w-full p-2`,
   };
 
@@ -26,6 +29,7 @@ function Input({
       </label>
 
       <input
+        disabled={disabled}
         {...register(id, validationOptions)}
         type={type}
         id={id}

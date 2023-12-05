@@ -1,6 +1,7 @@
 import ErrorMessage from "./ErrorMessage";
 
 function SelectOptions({
+  disabled,
   options,
   type,
   register,
@@ -10,8 +11,10 @@ function SelectOptions({
   errors,
 }) {
   const styles = {
-    registerType: `  ${
-      errors.userType ? "bg-red-200 border-red-200 focus:ring-red-400 " : ""
+    registerType: ` ${
+      errors.userType
+        ? "bg-red-200 border-1 border-solid border-red-500 focus:ring-offset-1 focus:ring-red-600 "
+        : ""
     } "  w-full mb-3 mt-3  p-2 rounded-sm text-2xl border-solid border-2  focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 border-sky-200  `,
   };
 
@@ -20,7 +23,9 @@ function SelectOptions({
       <select {...register(name, validationOptions)} className={styles[type]}>
         <option>{defaultValue}</option>
         {options.map((option) => (
-          <option key={option.value}>{option.value}</option>
+          <option disabled={disabled} key={option.id}>
+            {option.value}
+          </option>
         ))}
       </select>
       {<ErrorMessage>{errors.userType?.message}</ErrorMessage>}
