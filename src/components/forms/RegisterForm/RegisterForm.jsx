@@ -6,9 +6,31 @@ import SelectOptions from "ui/SelectOptions";
 import { emailPattern, passwordPattern, checkUserType } from "utils/userTypes";
 import { userNameMaxLength, userTypes } from "constants/user";
 import { useSignup } from "hooks/useSignup";
-import Spinner from "ui/Spinner/Spinner";
+import SpinnerMini from "ui/SpinnerMini/SpinnerMini";
+import { storage } from "services/storage";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function RegisterForm({ flip, setFlip }) {
+  let accessTokenObj = storage.getStorage();
+
+  const navigate = useNavigate();
+
+  useEffect(
+    function () {
+      if (accessTokenObj?.user) {
+        if (accessTokenObj.user?.user_metadata.userType) {
+          navigate(`/${accessTokenObj.user?.user_metadata.userType}`);
+        }
+      }
+    },
+    [
+      navigate,
+      accessTokenObj?.user,
+      accessTokenObj?.user?.user_metadata?.userType,
+    ]
+  );
+
   const {
     register,
     handleSubmit,
@@ -20,15 +42,9 @@ function RegisterForm({ flip, setFlip }) {
     mode: "onChange",
   });
 
-  // const { errors } = formState; // ⚠️ not the proper way to destruct errors
-
   const formData = watch();
 
-  console.log(formData);
-
-  console.log(errors);
-
-  const { signup, isPending } = useSignup();
+  const { signup, isPending, error } = useSignup();
 
   function onSubmit({ userName, email, password, userType }) {
     signup(
@@ -40,8 +56,6 @@ function RegisterForm({ flip, setFlip }) {
       }
     );
   }
-
-  if (isPending) return <Spinner />;
 
   return (
     <form
@@ -55,15 +69,15 @@ function RegisterForm({ flip, setFlip }) {
       <Input
         className={
           formData?.userName?.length >= userNameMaxLength
-            ? "bg-green-100 border-solid border-2 border-green-500 focus:ring-offset-1 focus:ring-green-500"
+            ? "bg-green-100 border-solid border-2 border-green-400 focus:ring-offset-1 focus:ring-green-400"
             : ""
         }
         disabled={isPending}
         errors={errors}
         label="Username"
-        id="userName" // ⚠️ id should be name
+        id="userName"
         type="text"
-        variation="login" // ⚠️ the loginInput name is too specific for variation
+        variation="login"
         register={register}
         validationOptions={{
           required: {
@@ -80,7 +94,7 @@ function RegisterForm({ flip, setFlip }) {
       <Input
         className={
           formData?.email && !errors?.email
-            ? "bg-green-100 border-solid border-2 border-green-500 focus:ring-offset-1 focus:ring-green-500"
+            ? "bg-green-100 border-solid border-2 border-green-400 focus:ring-offset-1 focus:ring-green-400"
             : ""
         }
         disabled={isPending}
@@ -105,7 +119,7 @@ function RegisterForm({ flip, setFlip }) {
       <Input
         className={
           formData?.password && !errors?.password
-            ? "bg-green-100 border-solid border-2 border-green-500 focus:ring-offset-1 focus:ring-green-500"
+            ? "bg-green-100 border-solid border-2 border-green-400 focus:ring-offset-1 focus:ring-green-400"
             : ""
         }
         disabled={isPending}
@@ -122,7 +136,7 @@ function RegisterForm({ flip, setFlip }) {
           },
           pattern: {
             value: passwordPattern,
-            message: "invalid Password Format", // ⚠️ it should be invalid not Invalid
+            message: "invalid Password Format",
           },
         }}
       />
@@ -130,7 +144,7 @@ function RegisterForm({ flip, setFlip }) {
         className={
           formData?.password &&
           formData?.password === formData?.passwordVerfication
-            ? "bg-green-100 border-solid border-2 border-green-500 focus:ring-offset-1 focus:ring-green-500"
+            ? "bg-green-100 border-solid border-2 border-green-400 focus:ring-offset-1 focus:ring-green-400"
             : ""
         }
         disabled={isPending}
@@ -163,17 +177,25 @@ function RegisterForm({ flip, setFlip }) {
               message: "Please Select User Type",
             },
             validate: (value) => {
-              if (!checkUserType(value)) return "Please Select a valid Type"; // ⚠️;
+              if (!checkUserType(value)) return "Please Select a valid Type";
             },
           }}
         />
       </div>
 
       <div className="flex justify-center gap-3 m-4 sm:m-3 md:m-2 sm:gap-0 sm:justify-between items-center flex-wrap">
-        <Button type="submit" variation="login">
-          Sign Up
+        <Button disabled={isPending} type="submit" variation="login">
+          {isPending ? <SpinnerMini /> : "Sign Up"}
         </Button>
-        <Button variation="rotate" onClick={() => setFlip(() => false)}>
+        <Button
+          variation="rotate"
+          onClick={() => {
+            if (!error) {
+              setFlip(() => false);
+              reset();
+            }
+          }}
+        >
           Already have an account ?
         </Button>
       </div>

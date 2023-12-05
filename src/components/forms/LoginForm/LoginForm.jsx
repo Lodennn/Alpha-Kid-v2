@@ -1,68 +1,98 @@
-import { useState } from "react";
-
 import Styles from "./LoginForm.module.scss";
 import Button from "ui/Button";
 import { useLogin } from "hooks/useLogin";
 import SpinnerMini from "ui/SpinnerMini/SpinnerMini";
+import Input from "ui/Input";
+import { useForm } from "react-hook-form";
+import { emailPattern, passwordPattern } from "utils/userTypes";
 
 function LoginForm({ flip, setFlip }) {
-  const [email, setEmail] = useState("");
-
-  const [password, setPassword] = useState("");
+  const {
+    reset,
+    handleSubmit,
+    watch,
+    register,
+    formState: { errors },
+  } = useForm({
+    mode: "onChange",
+  });
 
   const { login, isPending } = useLogin();
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log("XXX");
+  function onSubmit({ email, password }) {
+    if (!email || !password) return;
+
     login(
       { email, password },
       {
         onSettled: () => {
-          setEmail("");
-
-          setPassword("");
+          reset();
         },
       }
     );
   }
 
+  const formData = watch();
+
   return (
     <form
       aria-label="form"
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onSubmit)}
       className={`${Styles["form"]} ${
         flip ? "rotate-reverse " : "rotate-orgin rotate-reverse-animation"
       }`}
     >
       <h1 className={Styles["main-title"]}>Login</h1>
 
-      <div>
-        <label className="text-2xl 2xl:mt-3 mb-0 mt-3 md:mt-1 sm:mt-1 block sm:mb-1 md:mb-1 lg:mb-3 ">
-          Email Address
-        </label>
-        <input
-          disabled={isPending}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className=" border-solid border-2  text-2xl focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2  border-sky-200 w-full p-2"
-          type="email"
-          id="emailaddress"
-        />
-      </div>
-      <div>
-        <label className="text-2xl 2xl:mt-3 mb-0 mt-3 md:mt-1 sm:mt-1 block sm:mb-1 md:mb-1 lg:mb-3 ">
-          Password
-        </label>
-        <input
-          disabled={isPending}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className=" border-solid border-2  text-2xl focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2  border-sky-200 w-full p-2"
-          type="password"
-          id="loginPassword"
-        />
-      </div>
+      <Input
+        className={
+          formData?.email && !errors?.email
+            ? "bg-green-100 border-solid border-2 border-green-400 focus:ring-offset-1 focus:ring-green-400"
+            : ""
+        }
+        disabled={isPending}
+        errors={errors}
+        id="email"
+        label="Email Address"
+        type="email"
+        variation="login"
+        register={register}
+        validationOptions={{
+          required: {
+            value: true,
+            message: `The Email address is required`,
+          },
+          pattern: {
+            value: emailPattern,
+            message: "invalid email address",
+          },
+        }}
+      />
+
+      <Input
+        className={
+          formData?.password && !errors?.password
+            ? "bg-green-100 border-solid border-2 border-green-400 focus:ring-offset-1 focus:ring-green-400"
+            : ""
+        }
+        disabled={isPending}
+        errors={errors}
+        id="password"
+        label="Password"
+        type="password"
+        variation="login"
+        register={register}
+        validationOptions={{
+          required: {
+            value: true,
+            message: `The password is required`,
+          },
+          pattern: {
+            value: passwordPattern,
+            message: "invalid Password Format",
+          },
+        }}
+      />
 
       <div className="flex md:justify-between gap-4 justify-center sm:justify-center items-center flex-wrap">
         <Button disabled={isPending} type="submit" variation="login">
