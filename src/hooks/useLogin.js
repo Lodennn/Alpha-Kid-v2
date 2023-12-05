@@ -9,6 +9,7 @@ export function useLogin() {
   const { mutate: login, isPending } = useMutation({
     mutationFn: loginAPi,
     onSuccess: (user) => {
+      console.log(user);
       if (user?.user?.user_metadata.userType === "Parent") {
         navigate("/parent");
       } else if (user?.user?.user_metadata.userType === "Teacher") {

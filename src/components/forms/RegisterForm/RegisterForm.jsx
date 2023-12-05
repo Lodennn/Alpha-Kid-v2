@@ -4,14 +4,13 @@ import Input from "../../../ui/Input";
 import Styles from "./RegisterForm.module.scss";
 import SelectOptions from "../../../ui/SelectOptions";
 import {
-  userTypes,
   emailPattern,
-  userNameMaxLength,
   passwordPattern,
   checkUserType,
 } from "../../../utils/userTypes";
 import { useSignup } from "../../../hooks/useSignup";
 import Spinner from "../../../ui/Spinner/Spinner";
+import { userNameMaxLength, userTypes } from "../../../constants/user";
 
 function RegisterForm({ flip, setFlip }) {
   const {
@@ -60,7 +59,7 @@ function RegisterForm({ flip, setFlip }) {
       <Input
         className={
           formData?.userName?.length >= userNameMaxLength
-            ? "bg-green-100 border-solid border-2 border-green-300 focus:ring-offset-1 focus:ring-green-400"
+            ? "bg-green-100 border-solid border-2 border-green-500 focus:ring-offset-1 focus:ring-green-500"
             : ""
         }
         disabled={isPending}
@@ -85,7 +84,7 @@ function RegisterForm({ flip, setFlip }) {
       <Input
         className={
           formData?.email && !errors?.email
-            ? "bg-green-100 border-solid border-2 border-green-300 focus:ring-offset-1 focus:ring-green-400"
+            ? "bg-green-100 border-solid border-2 border-green-500 focus:ring-offset-1 focus:ring-green-500"
             : ""
         }
         disabled={isPending}
@@ -110,7 +109,7 @@ function RegisterForm({ flip, setFlip }) {
       <Input
         className={
           formData?.password && !errors?.password
-            ? "bg-green-100 border-solid border-2 border-green-300 focus:ring-offset-1 focus:ring-green-400"
+            ? "bg-green-100 border-solid border-2 border-green-500 focus:ring-offset-1 focus:ring-green-500"
             : ""
         }
         disabled={isPending}
@@ -135,7 +134,7 @@ function RegisterForm({ flip, setFlip }) {
         className={
           formData?.password &&
           formData?.password === formData?.passwordVerfication
-            ? "bg-green-100 border-solid border-2 border-green-300 focus:ring-offset-1 focus:ring-green-400"
+            ? "bg-green-100 border-solid border-2 border-green-500 focus:ring-offset-1 focus:ring-green-500"
             : ""
         }
         disabled={isPending}
