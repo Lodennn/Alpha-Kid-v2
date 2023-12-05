@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useLogout } from "../../hooks/useLogout";
-import Spinner from "../../ui/Spinner/Spinner";
-import { useUser } from "../../hooks/useUser";
-import { useCreateChild } from "../../features/children/useCreateChild";
+import { useUser } from "hooks/useUser";
+import { useCreateChild } from "features/children/useCreateChild";
+import { useLogout } from "hooks/useLogout";
+import Spinner from "ui/Spinner/Spinner";
 
 function ParentPage() {
   const { user } = useUser();

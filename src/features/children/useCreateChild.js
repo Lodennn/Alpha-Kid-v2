@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createChild as createChildApi } from "../../services/apiChildren";
+import { createChild as createChildApi } from "services/apiChildren";
 
 export function useCreateChild() {
   const queryCLient = useQueryClient();

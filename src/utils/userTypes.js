@@ -1,4 +1,4 @@
-import { userTypes } from "../constants/user";
+import { userTypes } from "constants/user";
 
 export const passwordPattern =
   /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;

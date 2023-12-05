@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { useUser } from "../hooks/useUser";
+import { useUser } from "hooks/useUser";
 import { useNavigate } from "react-router-dom";
-import { storage } from "../services/storage";
+import { storage } from "services/storage";
 import Spinner from "./Spinner/Spinner";
 
 function ProtectRoute({ children }) {

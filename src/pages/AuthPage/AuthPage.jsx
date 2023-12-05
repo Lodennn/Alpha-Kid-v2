@@ -1,6 +1,6 @@
-import Logo from "../../components/Logo/Logo";
+import Logo from "components/Logo/Logo";
 import styles from "./AuthPage.module.scss";
-import AuthPagesFormsWrapper from "../../components/AuthPagesFormsWrapper/AuthPagesFormsWrapper";
+import AuthPagesFormsWrapper from "components/AuthPagesFormsWrapper/AuthPagesFormsWrapper";
 
 function Login() {
   return (
