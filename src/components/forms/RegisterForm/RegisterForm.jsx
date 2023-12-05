@@ -190,10 +190,8 @@ function RegisterForm({ flip, setFlip }) {
         <Button
           variation="rotate"
           onClick={() => {
-            if (!error) {
-              setFlip(() => false);
-              reset();
-            }
+            setFlip(() => false);
+            reset();
           }}
         >
           Already have an account ?
