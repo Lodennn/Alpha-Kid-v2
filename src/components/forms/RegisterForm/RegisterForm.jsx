@@ -1,17 +1,17 @@
 import { useForm } from "react-hook-form";
-import Button from "../../../ui/Button";
-import Input from "../../../ui/Input";
+import Button from "ui/Button";
+import Input from "ui/Input";
 import Styles from "./RegisterForm.module.scss";
-import SelectOptions from "../../../ui/SelectOptions";
+import SelectOptions from "ui/SelectOptions";
 import {
   userTypes,
   emailPattern,
   userNameMaxLength,
   passwordPattern,
   checkUserType,
-} from "../../../utils/userTypes";
-import { useSignup } from "../../../hooks/useSignup";
-import Spinner from "../../../ui/Spinner/Spinner";
+} from "utils/userTypes";
+import { useSignup } from "hooks/useSignup";
+import Spinner from "ui/Spinner/Spinner";
 
 function RegisterForm({ flip, setFlip }) {
   const {

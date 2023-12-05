@@ -1,8 +1,9 @@
 import { useState } from "react";
-import Button from "../../../ui/Button";
+
 import Styles from "./LoginForm.module.scss";
-import { useLogin } from "../../../hooks/useLogin";
-import SpinnerMini from "../../../ui/SpinnerMini/SpinnerMini";
+import Button from "ui/Button";
+import { useLogin } from "hooks/useLogin";
+import SpinnerMini from "ui/SpinnerMini/SpinnerMini";
 
 function LoginForm({ flip, setFlip }) {
   const [email, setEmail] = useState("");
@@ -13,7 +14,7 @@ function LoginForm({ flip, setFlip }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-
+    console.log("XXX");
     login(
       { email, password },
       {

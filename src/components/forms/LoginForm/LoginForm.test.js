@@ -2,12 +2,13 @@ import "@testing-library/jest-dom";
 import { render, screen, within } from "@testing-library/react";
 import user from "@testing-library/user-event";
 import LoginForm from "./LoginForm";
+import { renderWithProviders } from "Services/Testing";
 
 test("it renders a login form successfully", () => {
   let flip = false;
   let setFlip = jest.fn();
 
-  render(<LoginForm flip={flip} setFlip={setFlip} />);
+  renderWithProviders(<LoginForm flip={flip} setFlip={setFlip} />);
 
   const loginForm = screen.getByRole("form");
 
@@ -29,7 +30,7 @@ test("it renders a login form successfully", () => {
 test("if *create a new account* button is working correctly", async () => {
   let setFlip = jest.fn();
 
-  render(<LoginForm flip={false} setFlip={setFlip} />);
+  renderWithProviders(<LoginForm flip={false} setFlip={setFlip} />);
 
   const loginForm = screen.getByRole("form");
 

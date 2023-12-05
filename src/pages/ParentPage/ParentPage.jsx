@@ -1,5 +1,5 @@
-import { useLogout } from "../../hooks/useLogout";
-import Spinner from "../../ui/Spinner/Spinner";
+import { useLogout } from "hooks/useLogout";
+import Spinner from "ui/Spinner/Spinner";
 
 function ParentPage() {
   const { logout, isPending } = useLogout();
